@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>reveal.js – The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <img data-src="img/angular2.png" alt="logo" class="borderless">
+            <h1>Angular <sub>2</sub></h1>
+            <!-- <h4>Presentation from an AngularJS (v1) dev</h4> -->
+        </section>
+
+        <section>
+            <h3>Suman kunwar</h3>
+            <img data-src="https://avatars2.githubusercontent.com/u/6531541?v=3&u=366577cdece650320b839d0b9f57836f76d8111a&s=200" alt="avatar" class="borderless">
+            <p><a href="http://twitter.com/sumn2u">@sumn2u</a></p>
+            <ul>
+                <li>Full-stack Developer</li>
+                <li>Enterprenur, Author, Co-Founder @Human Assist AI</li>
+                <li>Insturctor @udemy , Mentor @Coursera</li>
+                <li>Open source enthusiast </li>
+                <li>Member at Coursera Data Science Community </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Summary</h2>
+            <ul>
+                <li><a href="#/mythbuster">Myth-busters</a></li>
+                <li><a href="#/frameworks">One or many frameworks ?</a></li>
+                <li><a href="#/languages">Many languages...</a></li>
+                <li><a href="#/deepdive">Deep dive in Angular2</a></li>
+                <li><a href="#/beyondthehtml">Beyond the HTML</a></li>
+                <li><a href="#/migration">Migration</a></li>
+            </ul>
+        </section>
+
+        <section id="mythbuster">
+            <section>
+                <img data-src="img/mythbusters.png" alt="mythbusters" class="borderless" height="256">
+                <p>Since
+                    <a href="https://www.youtube.com/watch?v=gNmWybAyBHI">NG-Europe 2014 and the announcement of Angular2</a>
+                    , a lot of change have been made...
+                </p>
+            </section>
+            <section>
+                <h3>RIP of AngularJS principle</h3>
+                <img data-src="img/rip.angular-1.png" alt="rip-angular1.parts" width="256">
+            </section>
+            <section>
+                <h3>Why calling it Angular2 after all ?</h3>
+                <p>The core is still "Angular"</p>
+                <p>Keep only the good parts of the original Framework</p>
+            </section>
+            <section>
+                <h3>The v2 of Angular is React ?</h3>
+                <img data-src="img/twitter.toddmoto.angular2-react.png" alt="angular2-react">
+                <p>A lot of people was discourage by the change</p>
+                <p>The AngularTeam work hard to improve <b>Migration Path</b></p>
+            </section>
+            <section>
+                <h3>AtScript...?</h3>
+                <p>An extension of Javascript should have been the reference language</p>
+                <img src="img/microsoft-google.png" alt="microsoft-google" style="background: white">
+                <p>But Google/Microsoft teams-up to improve TypeScript</p>
+            </section>
+            <section>
+                <h3>It's not backward-compatible...</h3>
+                <p class="fragment">It's <b>True</b>
+                    <span class="fragment"> but the AngularTeam have something to help the migration...</span></p>
+            </section>
+            <section>
+                <h3>Angular1 is dying ?</h3>
+                <p class="fragment"><b>No</b><span class="fragment">, It will be supported during two years after the release of Angular2</span></p>
+                <p class="fragment">And your app won't stop working after this...</p>
+            </section>
+        </section>
+        <section id="frameworks">
+            <section>
+                <h3>One framework or many framework ?</h3>
+                <img src="img/Modular.png" alt="modular" class="borderless" height="128">
+                <p>AngularJS is a macro-framework with :</p>
+                <ul>
+                    <li>Dependency Injection</li>
+                    <li>Digest Cycle</li>
+                    <li>Module Dependency</li>
+                    <li>Directive for everything...</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Angular2 is a m*cro-framework</h3>
+                <ul>
+                    <li><a href="https://github.com/angular/di.js">DI.js</a> (Angular2 dependency injector)</li>
+                    <li><a href="https://github.com/angular/zone.js/">Zones.js</a></li>
+                    <li><a href="https://github.com/Reactive-Extensions/RxJS">Observable</a></li>
+                    <li><a href="https://github.com/systemjs/systemjs">SystemJs</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Native browser API</a></li>
+                </ul>
+            </section>
+        </section>
+        <section id="di">
+            <section>
+                <h3>Dependency Injection</h3>
+                <img src="img/kzuwy.jpg" alt="decouple">
+                <p>Help to conserve SOLI<b>D</b> principle in application</p>
+            </section>
+            <section>
+                <h3>In angular1</h3>
+                <pre><code class="hljs" data-trim>angular.module('myApp', [])
+    .constant('Engine', function(){}).
+    .constant('Tires', function(){}).
+    .service('Car', Car);
+
+function Car(Engine, Tires){...};
+Car.$inject('Engine', 'Tires');</code></pre>
+                <ul>
+                    <li>Duplication of "code"</li>
+                    <li>Singleton for the whole App</li>
+                    <li>Namespace collision</li>
+                </ul>
+            </section>
+            <section>
+                <h3>DI in Angular2</h3>
+                <p>In ES2015</p>
+                <pre><code class="hljs" data-trim>import { Inject } from 'angular2/core';
+class Car {
+  constructor(@Inject(Engine) engine, @Inject(Tires) tires) {}
+}</code></pre>
+                <p>In TypeScript</p>
+                <pre><code class="hljs javascript" data-trim>class Car {
+  constructor(engine: Engine, tires: Tires) {}
+}</code></pre>
+            </section>
+            <section>
+                <h3>The Injector</h3>
+                <img src="img/injector.png" alt="di" width="600" style="background: white">
+                <p>So it's just a Map&ltToken, Provider&gt</p>
+            </section>
+            <section>
+                <h3>Providing Injectable</h3>
+                <pre><code class="hljs javascript" data-trim>import { Injector } from 'angular2/core';
+...
+let injector = Injector.resolveAndCreate([
+  Car,
+  Engine,
+  Tires
+]);
+
+let car = injector.get(Car);</code></pre>
+                <pre class="fragment"><code class="hljs javascript" data-trim>import { Injector, provide } from 'angular2/core';
+...
+let injector = Injector.resolveAndCreate([
+  provide(Car, {useClass: Car}),
+  provide(Engine, {useClass: Engine}),
+  provide(Tires, {useClass: Tires})
+]);</code></pre>
+            </section>
+            <section>
+                <h3>Multiple sort of injectable</h3>
+                <pre><code class="hljs javascript" data-trim>import { Injector, provide } from 'angular2/core';
+...
+let injector = Injector.resolveAndCreate([
+  Car, // Class as a Provider
+  provide(Car, {useClass: Car}), // Full description of Provider, allow aliases
+  provide(Car, {
+        useFactory : (engine, tire) => new Car(engine, tire),
+        deps : ['Engine', 'Tire']
+    }), // Provide Car from Factory
+  provide(Tire, {useValue: "Tire"}), // Use Value
+  SuperEngine,
+  provide(Engine, {useExisting : SuperEngine }), // Use Alias
+]);</code></pre>
+            </section>
+            <section>
+                <h3>Injector(s)</h3>
+                <p>Singleton only inside the same injectors</p>
+                <pre><code class="hljs javascript" data-trim>import { Injector } from 'angular2/core';
+
+let injector = Injector.resolveAndCreate([Engine]);
+let childInjector = injector.resolveAndCreateChild([Engine]);
+
+injector.get(Engine) === injector.get(Engine);
+injector.get(Engine) !== childInjector.get(Engine);</code></pre>
+            </section>
+            <section>
+                <h3>Inheritance between Injector</h3>
+                <img src="img/childInjector.png" alt="childinjector">
+            </section>
+        </section>
+        <section id="zones">
+            <section>
+                <h3>Zones.js</h3>
+                <p>Zones are simply an <b>Execution context</b> for Javascript</p>
+            </section>
+            <section data-background-image="img/zones/explosion.gif"><p>&nbsp;</p></section>
+            <section data-transition="none-in">
+                <h3>Zones.js</h3>
+                <p>Zones are simply an <b>Execution context</b> for Javascript</p>
+                <p>It helps to handle asynchronous code in JS</p>
+                <p>Extract from <b>Dart Lang</b>, alternative to <i>Domains</i> in NodeJS</p>
+            </section>
+            <section>
+                <h3><a target="_blank" href="examples/zones/javascript.101.html">Javascript 101</a></h3>
+                <pre><code class="hljs javascript" data-trim>function cf(name) { return function() { console.log(name); } };
+var a = cf('a'), b = cf('b'), c = cf('c'), d = cf('d');
+
+a();
+setTimeout(b, 0);
+setTimeout(c, 0);
+d();</code></pre>
+                <div class="fragment">
+                    <p>Results to </p>
+                <pre><code class="hljs javascript" data-trim>a
+d
+b
+c</code></pre>
+                </div>
+                <p class="fragment">All the async tasks are added to the event queue and executed when other tasks are finished</p>
+            </section>
+            <section>
+                <h3>How long does it take ?</h3>
+                <pre><code class="hljs javascript" data-trim>start();
+a();
+setTimeout(b, 0);
+setTimeout(c, 0);
+d();
+stop();</code></pre>
+                <div class="fragment">
+                    <p>Results :</p>
+                <pre><code class="hljs javascript" data-trim>// Start
+a
+d
+// Stop
+b // Missed
+c // Missed</code></pre>
+                </div>
+            </section>
+            <section data-transition="none-out">
+                <h3><a href="examples/zones/sort-async.html">What need to be done ?</a></h3>
+                <img src="img/zones/execution-without-zones.png" alt="no-zones">
+            </section>
+            <section data-transition="none">
+                <h3><a href="examples/zones/sort-async.html">What need to be done ?</a></h3>
+                <img src="img/zones/execution-in-zones.png" alt="with-zones">
+            </section>
+            <section>
+                <h3>Why are we talking about this ?</h3>
+                <p>Let's consider a framework, for example AngularJS with this: </p>
+                <pre><code class="hljs javascript" data-trim>var $rootScope;
+zone
+    .fork({
+        afterTask : function() {
+            $rootScope.$digest();
+        }
+    })
+    .run(function() {
+        angular.bootstrap(document, aModule);
+        $rootScope = angular
+            .element(document)
+            .injector()
+            .get('$rootScope');
+    });</code></pre>
+            </section>
+            <section>
+                <h3>Bonus</h3>
+                <p><a href="examples/zones/basic.without-zones.html">Without Exception Handler</a> | <a href="examples/zones/basic.html">With Exception Handler</a></p>
+            </section>
+        </section>
+        <section id="observables">
+            <section>
+                <h3>Observables</h3>
+            </section>
+            <section data-background="img/observables/observables.gif"> &nbsp; </section>
+            <section>
+                <h3>Definition</h3>
+                <blockquote cite="http://cycle.js.org/observables.html">
+                    &ldquo;Observables are lazy event streams which can emit zero or more events, and may or may not finish.&rdquo;
+                </blockquote>
+            </section>
+            <section>
+                <h3>How many time did you write this ?</h3>
+                <pre><code class="hljs javascript">$scope.$watch('foo.bar', (newVal, oldVal) => {
+    ...
+});</code></pre>
+            </section>
+            <section>
+                <h3>Or this ?</h3>
+                <pre><code class="hljs javascript">$scope.$watch('foo.bar', (newVal, oldVal) => {
+    if (newVal.length <= 0)
+        return;
+    let firstTransformation = removeSpaces(newVal);
+    let secondTransoformation = firstTransformation.toUpperCase();
+    $scope.result = thirdTransformation;
+});</code></pre>
+            </section>
+            <section>
+                <h3>RxJS</h3>
+                <img src="img/observables/logo.png" alt="rxjs" class="borderless" width="256" >
+            </section>
+            <section>
+                <h3>Simpler !</h3>
+                <p>We can write our previous $watch like this...</p>
+                <pre><code class="hljs javascript">foo.bar$ // An Observable
+    .filter(v => v.length > 0)
+    .map(v => removeSpaces(v))
+    .map(v => v.toUpperCase())
+    .subscribe(
+        v => $scope.result = v /* An Observer */
+    );
+</code></pre>
+            </section>
+            <section>
+                <h3>And we have a lot of operators !</h3>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>create</li>
+                        <li>range</li>
+                        <li>using</li>
+                        <li>from</li>
+                        <li>of</li>
+                        <li>toPromise</li>
+                        <li>toMap</li>
+                        <li>toSet</li>
+                        <li>toArray</li>
+                        <li>amb</li>
+                        <li>combineLatest</li>
+                        <li>concat</li>
+                        <li>startWith</li>
+                        <li>merge</li>
+                        <li>repeat</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>withLatestFrom</li>
+                        <li>zip</li>
+                        <li>publish</li>
+                        <li>replay</li>
+                        <li>aggregate</li>
+                        <li>average</li>
+                        <li>count</li>
+                        <li>max</li>
+                        <li>min</li>
+                        <li>reduce</li>
+                        <li>sum</li>
+                        <li>debounce</li>
+                        <li>interval</li>
+                        <li>filter</li>
+                        <li>map</li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 33%; font-size: 75%" class="fragment">
+                    <ul>
+                        <li>elementAtOrDefault</li>
+                        <li>flatMap</li>
+                        <li>findIndex</li>
+                        <li>first</li>
+                        <li>pluck</li>
+                        <li>select</li>
+                        <li>single</li>
+                        <li>take</li>
+                        <li>takeLast</li>
+                        <li>where</li>
+                        <li>buffer</li>
+                        <li>groupBy</li>
+                        <li>join</li>
+                        <li>windowd</li>
+                        <li>do</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h3>Any documentation ?</h3>
+                <p>Yes, and it's very fun !</p>
+                <a href="http://rxmarbles.com/#map" target="_blank"><img src="img/observables/marble.map.png" alt="map"></a>
+            </section>
+            <section>
+                <h3>Good to know...</h3>
+                <p>Observable are immutable, composable and reusable</p>
+                <pre><code class="hljs javascript">let obs$ = Rx.Observable.from(1, 2, 3, 4, 5);
+obs.subscribe(x => console.log(x)); // 1, 2, 3, 4, 5
+
+let evenObs$ = obs.filter(x => x%2 == 0 ));
+evenObs$.subscribe(x => console.log(x)) // 2, 4
+evenObs$.map(x => x*2).subscribe(x => console.log(x)) // 4, 8
+</code></pre>
+            </section>
+            <section>
+                <img src="img/observables/everywhere.jpg" alt="observable-everywhere">
+            </section>
+        </section>
+        <section id="systemjs">
+            <section>
+                <h3>SystemJS</h3>
+                <p>A polifyll for ES2017 (?) module loader</p>
+            </section>
+            <section>
+                <h3>Module dependency done easy</h3>
+                <p>In AngularJS (it's so 2009...)</p>
+                <pre><code>angular.module('FooModule', [
+ 'BarModule',
+ 'anotherModule'
+]);</code></pre>
+                <div class="fragment">
+                    <p>In ES2015 & SystemJS</p>
+                    <pre><code>import { BarModule } from './Bar.comp';
+import { AnotherComp } from './another.comp';</code></pre>
+                </div>
+                <p class="fragment">Simple to maintain !</p>
+            </section>
+            <section>
+                <h3>Is it worth it ?</h3>
+                <p>Angular2 is fully modular</p>
+                <p>Reduce the size of the app depending of what your app need</p>
+            </section>
+            <section data-background="img/systemjs/mrpotato.jpg"><p>&nbsp;</p></section>
+            <section>
+                <h3>And we deserve better than... this !</h3>
+                <pre><code class="hljs javascript">(function (global, factory) {
+ typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+   (factory());
+}(this, function () { 'use strict';
+  function myAwesomModule() {
+    ...
+  }
+}));</code></pre>
+            </section>
+            <section>
+                <h3>Only SystemJS ?</h3>
+                <p>No... you can use what you want</p>
+                <div class="split-left" style="width: 33%">
+                    <img src="img/systemjs/webpack.png" alt="webpack" height="192">
+                    <br>
+                    <a href="https://webpack.github.io/docs/">Webpack</a>
+                </div>
+                <div class="split-left" style="width: 33%">
+                    <img src="img/systemjs/jspm.png" alt="jspm" height="192">
+                    <br>
+                    <a href="http://jspm.io/">JSPM</a>
+                </div>
+                <div class="split-left" style="width: 33%">
+                    <img src="img/systemjs/rollupjs.svg" alt="rollupjs" height="192">
+                    <br>
+                    <a href="http://rollupjs.org/">Rollup.js</a>
+                </div>
+            </section>
+            <section>
+                <h3>For information...</h3>
+                <ul>
+                    <li>Webpack 2 will try to fill the gap between Webpack 1 and JSPM/Rollup</li>
+                    <li>JSPM uses Rollup.Js for the build and tree-shaking</li>
+                    <li>The AngularTeam uses Rollup to build Angular2 right now</li>
+                </ul>
+            </section>
+        </section>
+        <section id="nativebrowserapi">
+            <section>
+                <h3>An after jQuery-World</h3>
+                <img src="img/nativebrowserapi/jquery.svg" alt="jquery" style="background-color: white">
+                <p>Born in 2006 and help a lot of Web developers...</p>
+            </section>
+            <section>
+                <h3>In AngularJS, we use jQuery Lite</h3>
+                <p>Good fallback to do more in a complicated world</p>
+                <img src="img/nativebrowserapi/ie8.jpg" alt="ie8" width="512" class="fragment">
+            </section>
+            <section>
+                <h3>But now, we need to be serious because...</h3>
+                <img src="img/nativebrowserapi/iedie.jpeg" alt="iedie" class="fragment">
+            </section>
+            <section data-background="img/nativebrowserapi/party.gif">
+                <p><a href="https://www.microsoft.com/fr-fr/WindowsForBusiness/End-of-IE-support">Since January, the 12th 2016 !</a></p>
+            </section>
+            <section>
+                <h3>HTML5 API's are just enough !</h3>
+                <img src="img/nativebrowserapi/mdn.png" alt="mdn" class="borderless">
+            </section>
+            <section>
+                <h3>CSS3 query Selectors</h3>
+                <pre><code class="hljs javascript">let firstClass = document.querySelector('.some-class');
+let allOfClass = document.querySelectorAll('.some-class');</code></pre>
+            </section>
+            <section>
+                <h3>CSS class manipulation</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+elem.classList.add('some-class'); // Add class
+elem.classList.remove('some-other-class'); // Remove class
+elem.classList.toggle('some-other-class') // ...toggle...
+elem.classList.contains('some-third-class') // Does it have some class ?</code></pre>
+                <div class="fragment">
+                    <p>Same thing on inline style...</p>
+                    <pre><code class="hljs javascript">elem.style.color; // Get a CSS attribute
+elem.style.color = 'rebeccapurple'; // Set a CSS attribute
+elem.style.minHeight; // Get a CSS attribute
+elem.style.minHeight = '200px'; // Set a CSS attribute</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>Working with Event</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+elem.addEventListener('click', () => console.log('clicked'), false);
+elem.addEventListener('customEvent', anotherFunction, false);</code></pre>
+            </section>
+            <section>
+                <h3>Navigating into the dom</h3>
+                <pre><code class="hljs javascript">let elem = document.querySelector('#some-element');
+
+let parent = elem.parentNode;
+let childs = elem.childNodes;
+
+let specificChild = elem.querySelector('anotherClass');
+let specificChilds = elem.querySelectorAll('anotherClass');</code></pre>
+            </section>
+            <section>
+                <h3>And about perf ?</h3>
+                <img src="img/nativebrowserapi/perf.jpg" alt="perf">
+            </section>
+        </section>
+        <section id="languages">
+            <section>
+                <h3>Many Languages</h3>
+                <img src="img/languages/rip.jpeg" alt="atScript">
+            </section>
+            <section data-transition="none">
+                <h3>Simpler...</h3>
+                <img src="img/languages/comparison.no-compile.png" alt="no-compile">
+            </section>
+            <section data-transition="none">
+                <h3>Future proof</h3>
+                <img src="img/languages/comparison.no-type.png" alt="no-type">
+            </section>
+            <section data-transition="none">
+                <h3>Type and IDE help</h3>
+                <img src="img/languages/comparison.no-js.png" alt="no-js">
+            </section>
+            <section>
+                <h3>JS based, vector of innovation</h3>
+                <!--<img src="img/languages/sets.png" alt="sets">-->
+                <!--<div class="fragment" data-fragment-index="4" style="background-color: green; height: 400px; width: 400px; border-radius: 50%"> TypeScript
+                    <div class="fragment" data-fragment-index="3" style="background-color: brown; height: 300px; width: 300px;border-radius: 50%"> ES+
+                        <div class="fragment" data-fragment-index="2" style="background-color: blue; height: 200px; width: 200px;border-radius: 50%">ES6
+                            <div class="fragment" data-fragment-index="1" style="background-color: red; height: 100px; width: 100px;border-radius: 50%">ES5</div>
+                        </div>
+                    </div>
+                </div>-->
+<!--                <div>
+                    <div class="fragment" data-fragment-index="4" style="height: 500px; position: absolute; float: left;margin-top:100px;">
+                        <div style="background-color: green; height: 400px; width: 400px;border-radius: 50%;">TypeScript</div>
+                    </div>
+
+                    <div class="fragment" data-fragment-index="3" style="height: 500px; position: absolute; float: left;margin-top:150px;">
+                        <div style="background-color: brown; height: 300px; width: 300px;border-radius: 50%;">ES+</div>
+                    </div>
+
+                    <div class="fragment" data-fragment-index="2" style="height: 500px; position: absolute; float: left;margin-top:200px;">
+                        <div style="background-color: blue; height: 200px; width: 200px;border-radius: 50%;">   ES6</div>
+                    </div>
+                    <div class="fragment" data-fragment-index="1" style="height: 500px; position: absolute; float: left;margin-top:250px;">
+                        <div style="background-color: red; height: 100px; width: 100px;border-radius: 50%;">ES5</div>
+                    </div>
+                </div>-->
+                <img src="img/languages/sets.png" alt="sets">
+            </section>
+            <section>
+                <h3>So you can write Angular2 in Plain Old Javascript</h3>
+                <pre><code>var TodoComp = ng
+.Component({
+ selector: 'todo',
+ templateUrl: '../partials/todo.html'
+})
+.Class({
+ constructor: function (heroService, routeParams) {}
+ select(todo){...}
+});</code></pre>
+                <p>But, it isn't as fun as evolved JS</p>
+            </section>
+            <section>
+                <h3>Or with Type and Decorators !</h3>
+                <pre><code class="hljs javascript">@Component({
+ selector: 'todo',
+ templateUrl: '../partials/todo.html'
+})
+export class TodoComp {
+    constructor(
+        private heroService: HeroService,
+        private routeParams: RouteParams
+    ){}
+
+    select(todo : Todo) : Boolean {...}
+}</code></pre>
+            </section>
+        </section>
+        <section id="deepdive">
+            <section>
+                <h3>Angular2</h3>
+                <p>All is about Component</p>
+                <p class="fragment">EVERYWHERE !</p>
+            </section>
+            <section data-background="img/deepdive/blocks.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>An app are just some buildings block</h3>
+                <img src="img/deepdive/tree.svg" alt="tree" class="borderless">
+            </section>
+            <section>
+                <h3>A Component is</h3>
+                <p><span class="fragment">Template </span><span class="fragment">+ Controller </span><span class="fragment">(+ optional RouteConfig)</span></p>
+            </section>
+        </section>
+        <section id="template">
+            <section>
+                <h3>Template</h3>
+                <pre><code class="hljs html">&ltdiv&gtMy title is {{ title }}&lt/div&gt</code></pre>
+            </section>
+            <section>
+                <h3>Property Bindings</h3>
+                <p>No more ng-x directives</p>
+                <p class="fragment">Instead, we use standard HTML for property binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&lth3 ng-hide="vm.isHidden" ng-class="{active : favoriteHero === hero }" &gt
+  Your favorite hero is: {{ vm.favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&lth3 [hidden]="isHidden" [class.active]="favoriteHero === hero" &gt
+  Your favorite hero is: {{ favoriteHero }}
+&lt/h3&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>Event Bindings</h3>
+                <p><b>Really</b> no more ng-x directives</p>
+                <p class="fragment">Again, we use standard HTML for event binding</p>
+                <div class="fragment">
+                    <pre><code class="hljs html">&ltinput ng-click="vm.send(foo)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+                <div class="fragment">
+                    <p>becomes...</p>
+                    <pre><code class="hljs html">&ltinput (click)="send($event)"&gtClick me !&lt/input&gt</code></pre>
+                </div>
+            </section>
+            <section>
+                <h3>And the 'magical' two-way binding ?</h3>
+                <p>It disappears, so we have to do it manually</p>
+                <pre><code class="hljs html">&ltinput [value]="hero.firstName"
+       (input)="hero.firstName=$event.target.value" &gt</code></pre>
+            </section>
+            <section data-background="img/deepdive/sad.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>NgModel Directive</h3>
+                <p>The API evolves to introduce a syntax for the two-way binding in latest Alpha</p>
+                <pre><code class="hljs html">&ltinput [(ngModel)]="hero.firstname"&gt</code></pre>
+                <p>This syntax is a mix between property and event bindings</p>
+            </section>
+            <section data-background="img/deepdive/twowaybinding.png"><p>&nbsp;</p></section>
+            <section data-background="img/deepdive/happy.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>Structural Directive</h3>
+                <p>All the directive inducing a dom modification outside of the current element are called <b>Structural Directive</b></p>
+                <ul>
+                    <li>ng-if</li>
+                    <li>ng-switch</li>
+                    <li>ng-repeat</li>
+                </ul>
+            </section>
+            <section>
+                <h3>The syntax is a kind of special...</h3>
+                <pre><code class="hljs html">&ltp *ngIf="condition"&gt
+  condition is true and ngIf is true.
+&lt/p&gt</code></pre>
+                <pre><code class="hljs html">&lttr *ngFor="let movie of movies"&gt{{movie.name}}&lt/tr&gt</code></pre>
+                <p class="fragment">But Why ?</p>
+            </section>
+            <section>
+                <h3>Using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML Template Element</a></h3>
+                <pre><code class="hljs html">&lttemplate&gt
+    &ltdiv&gtA super template !&lt/div&gt
+&lt/template&gt</code></pre>
+                <p>This template isn't rendered by the browser but can be used</p>
+            </section>
+            <section>
+                <h3>The asterisk (*) effect</h3>
+                <pre><code class="hljs html">&lt;p *ngIf="condition"&gt;
+    A super template !
+&lt;/p&gt;</code></pre>
+                <pre><code class="hljs html">&lt;template [ngIf]="condition"&gt;
+  &lt;p&gt;
+    A super template !
+  &lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                <p class="fragment">So, the * is just a syntaxic sugar</p>
+                <p class="fragment">And we can write our own Structural Directive !</p>
+            </section>
+            <section>
+                <h3>Local template variable</h3>
+                <p>We can define a template variable associated to a dom element</p>
+                <pre><code class="hljs html">&ltvideo #player src="foo.mp4"&gt&lt/video&gt
+&ltbutton (click)="player.play()"&gt&lt/button&gt</code></pre>
+            </section>
+        </section>
+        <section id="controller">
+            <section>
+                <h3>Controller</h3>
+                <p>Still holding all the logic of the component</p>
+                <p>And compared to Angular1, a component is a tiny "App"</p>
+            </section>
+            <section>
+                <h3>Shell up a Component Declaration</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+}</code></pre>
+            </section>
+            <section>
+                <h3>Using a service in my component</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){} // DI in constructor
+
+}</code></pre>
+            </section>
+            <section data-background="img/deepdive/firsterror.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>Using a service in my component</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt;`,
+ providers : [ MyService ] // Do you remember the injector part ?
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){} // DI in constructor
+
+}</code></pre>
+            </section>
+            <section>
+                <h3>And now a sub component...</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+
+@Component({
+ selector: 'todo',
+ template: `
+    &lt;h1&gt;{{ title }}&lt;/h1&gt;
+    &lt;emitter&gt;&lt;/emitter&gt;
+ `,
+ providers : [ MyService ]
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+
+  constructor(private _myService : MyService){}
+
+}</code></pre>
+            </section>
+            <section data-background="img/deepdive/merlin.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>And now a sub component...</h3>
+                <pre><code class="hljs javascript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+import { EmitterComponent } from "./emitter.component";
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt; &lt;emitter&gt;&lt;/emitter&gt;`,
+ directives : [ EmitterComponent ] // Inclusion of all subComp needed
+ providers : [ MyService ]
+})
+export class TodoComp {
+  public title : String = 'A super presentation !!';
+  constructor(private _myService : MyService){}
+}</code></pre>
+            </section>
+            <section>
+                <h3>Why so complicated ?</h3>
+                <ul>
+                    <li>Allow Singleton / Multiple service for part of app</li>
+                    <li>Avoid name conflict in html</li>
+                    <li>All system handle in same place !</li>
+                </ul>
+            </section>
+            <section data-transition="none-out">
+                <h3>Now, Components have an intuitive LifeCycle</h3>
+                <ul>
+                    <li><b>OnChange</b><i class="fragment muted"> - input|output binding value changes</i></li>
+                    <li><b>OnInit</b><i class="fragment muted"> - after the 1st OnChange</i></li>
+                    <li><b>DoCheck</b><i class="fragment muted"> - dev's custom change detection</i></li>
+                    <li><b>AfterContentInit</b><i class="fragment muted"> - after comp content initialized</i></li>
+                    <li><b>AfterContentChecked</b><i class="fragment muted"> - after every check of comp content</i></li>
+                    <li><b>AfterViewInit</b><i class="fragment muted"> - after comp's view(s) are initialized</i></li>
+                    <li><b>AfterViewChecked</b><i class="fragment muted"> - after every check of a comp's view(s)</i></li>
+                    <li><b>OnDestroy</b><i class="fragment muted"> - just before destruction</i></li>
+                </ul>
+            </section>
+            <section>
+                <h3>And we can use Interface to declare it</h3>
+                <pre><code class="hljs typescript">import { Component } from 'angular2/core';
+import { MyService } from './myservice';
+import { EmitterComponent } from "./emitter.component";
+
+@Component({
+ selector: 'todo',
+ template: `&lt;h1&gt;{{ title }}&lt;/h1&gt; &lt;emitter&gt;&lt;/emitter&gt;`,
+ directives : [ EmitterComponent ] // Inclusion of all subComp needed
+ providers : [ MyService ]
+})
+export class TodoComp implements OnInit {
+  public title : String = 'A super presentation !!';
+  constructor(private _myService : MyService){}
+
+  ngOnInit() { console.log('The Component is initialised'); }
+}</code></pre>
+                <p class="fragment">No more headache with [pre|post]link and compile</p>
+            </section>
+        </section>
+        <section id="communication">
+            <section>
+                <h3>Communication</h3>
+                <p>We have now a component, but we want to communicate with other element</p>
+                <p>How could we do that without any DDO ?</p>
+            </section>
+            <section>
+                <h3>Again, all is in component</h3>
+            </section>
+            <section>
+                <h3>Input(s)</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input() counterValue = 0;
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs typescript">&lt;counter [counterValue]=&quot;10&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Inputs(s) with Alias</h3>
+                <pre><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs typescript">&lt;counter [start]=&quot;10&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Output(s) as Events !</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+  @Output() stateEmitter = new EventEmitter&lt;State&gt;();
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (stateEmitter)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Output(s) with alias too (of course...)</h3>
+                <pre class="fragment"><code class="hljs typescript">import {Component, Input} from 'angular2/core';
+@Component({
+  selector: 'counter'
+  template: `...`
+})
+export class CounterCmp {
+  @Input('start') counterValue = 0;
+  @Output('finish') stateEmitter = new EventEmitter&lt;State&gt;();
+
+  finish() {
+    this.stateEmitter.emit(myState);
+  }
+}
+</code></pre>
+                <pre class="fragment"><code class="hljs html">&lt;counter [start]=&quot;10&quot; (finish)=&quot;show($event)&quot;&gt;&lt;/counter&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Bi-Directional communication</h3>
+                <ul>
+                    <li>[Input] as data-binding</li>
+                    <li>(Output) as event-binding</li>
+                </ul>
+                <div class="fragment">
+                    <p>No more of</p>
+                    <!--<ul>
+                        <li>Is it data-binding, value-binding, function binding ?</li>
+                        <li>Do I have to write it with controller attribute or with interpollation {{ ? }}</li>
+                    </ul>-->
+                    <pre><code class="hljs html">&lt;foo bar=&quot;val&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;{{ val }}&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;val()&quot;&gt;&lt;/foo&gt;
+&lt;foo bar=&quot;val&quot;&gt;&lt;/foo&gt; &lt;!-- the word 'val', not the value'</code></pre>
+                </div>
+            </section>
+        </section>
+        <section id="service">
+            <section>
+                <h3>Service</h3>
+                <p>It's where the logic of your app should be...</p>
+            </section>
+            <section>
+                <h3>Question</h3>
+                <img src="img/deepdive/service-choose.jpg" alt="wwtbm" width="750">
+            </section>
+            <section>
+                <h3>And you think Angular2 is more complicated ?</h3>
+                <p>We can declare a service like this</p>
+                <pre><code class="hljs javascript">export class MyService{}</code></pre>
+                <pre class="fragment"><code class="hljs javascript">providers : [ MyService ]</code></pre>
+            </section>
+            <section>
+                <h3>@Injectable</h3>
+                <p>Just need one decorator to allow DI</p>
+                <pre><code class="hljs javascript">import {Injectable} from 'angular2/core';
+
+@Injectable()
+export class MyService{
+ constructor(private _http : http){}
+}</code></pre>
+            </section>
+        </section>
+        <section id="alotmore">
+            <section>
+                <h3>Major change everywhere...</h3>
+                <p>We don't have time to deep dive on everyone, but we can mention it</p>
+            </section>
+            <section>
+                <h3><span class="fragment">Component</span>Router</h3>
+            </section>
+            <section data-background="img/router/router.jpg">&nbsp;</section>
+            <section>
+                <h3>Why we need a new Router ?</h3>
+                <p>A `component` logic lead to a Component Router</p>
+            </section>
+            <section>
+                <h3>Ng-Route was too simple</h3>
+                <div class="fragment">
+                    <img src="img/router/ui.png" alt="ui" class="borderless" width="256">
+                    <p>The UI-Router alternative was quite popular</p>
+                </div>
+            </section>
+            <section>
+                <h3>The Router provide now</h3>
+                <ul>
+                    <li>Named Route</li>
+                    <li>Dedicated @RouteConfig and Directive</li>
+                    <li>Hierarchical Route</li>
+                    <li>Concurrent Route</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Configurable Change-Detection</h3>
+                <ul>
+                    <li>1 digest cycle allow to treat the whole app</li>
+                    <li>You can alter the Change detection behavior</li>
+                    <li>Optimized for immutability</li>
+                </ul>
+            </section>
+            <section>
+                <h3>View Encapsulation mode</h3>
+                <p>We can encapsulate everything, and we can do it by multiple way</p>
+            </section>
+            <section>
+                <h3>For a given Component</h3>
+                <pre><code class="hljs javascript">import {ViewEncapsulation} from 'angular2/core';
+
+@Component({
+  selector: 'comp',
+  templateUrl: '&lt;div class=&quot;my-comp&quot;&gt;An encapsulated comp&lt;/div&gt;',
+  styles: [`.my-comp { background: green; }`],
+  encapsulation: ViewEncapsulation.Emulated
+})
+class Comp {}</code></pre>
+            </section>
+            <section>
+                <h3>Emulated</h3>
+                <p>Which is the default encapsulation system</p>
+                <pre class="fragment"><code class="hljs">&lt;head&gt;
+ &lt;style&gt;.my-comp[_ngcontent-1] {background: green;}&lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                <pre class="fragment"><code class="hljs">&lt;comp _ngcontent-0 _nghost-1&gt;
+ &lt;div class=&quot;my-comp&quot; _ngcontent-1&gt;
+  An encapsulated comp
+ &lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Native</h3>
+                <p>Which uses the Shadow-DOM</p>
+                <pre><code>encapsulation: ViewEncapsulation.Native</code></pre>
+                <pre class="fragment"><code class="hljs">&lt;comp&gt;
+ #shadow-root
+ | &lt;style&gt;
+ |  .my-comp { background: green; }
+ | &lt;/style&gt;
+ | &lt;div class=&quot;my-comp&quot;&gt;An encapsulated comp&lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>None</h3>
+                <p>Take care of Side effect !</p>
+                <pre><code>encapsulation: ViewEncapsulation.None</code></pre>
+               <pre class="fragment"><code class="hljs">&lt;head&gt;
+ &lt;style&gt;.my-comp {background: green;}&lt;/style&gt;
+&lt;/head&gt;</code></pre>
+            <pre class="fragment"><code class="hljs">&lt;comp _nghost-1&gt;
+ &lt;div class=&quot;my-comp&quot;&gt;
+  An encapsulated comp
+ &lt;/div&gt;
+&lt;/comp&gt;</code></pre>
+            </section>
+            <section>
+                <h3>Angular-CLI</h3>
+                <p>Derived from ember-cli</p>
+                <pre><code class="hljs bash">$ ng new project
+$ ng generate component my-new-component
+$ ng build
+$ ng test
+$ ng e2e
+$ ng server</code></pre>
+            </section>
+        </section>
+        <section id="beyondthehtml">
+            <section>
+                <h3>Beyond the browser...</h3>
+                <p class="fragment">The JS will live out the <i>window</i> element</p>
+            </section>
+            <section data-background="img/beyondthebrowser/what.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>A new Era !</h3>
+                <p class="fragment">The progressive Web-App era</p>
+            </section>
+            <section>
+                <h3>Web-Worker</h3>
+                <img src="img/beyondthebrowser/webworker.png" alt="web-worker" class="borderless" height="256">
+                <p>A way to do 'heavy' calculation in another thread</p>
+            </section>
+            <section>
+                <h3>Service-Worker</h3>
+                <p>After Mobile First, <b>Offline-First</b></p>
+                <div class="allow">
+                    <div style="float: left; width: 33%">
+                        <img src="img/beyondthebrowser/cache.png" alt="cache" class="borderless" height="200">
+                        <p>Cache</p>
+                    </div>
+                    <div style="float: left; width: 34%">
+                        <img src="img/beyondthebrowser/offline.png" alt="offline" class="borderless" height="200">
+                        <p>Offline</p>
+                    </div>
+                    <div style="float: left; width: 33%">
+                        <img src="img/beyondthebrowser/sync.png" alt="sync" class="borderless" height="200">
+                        <p>Synchronisation</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Universal Angular</h3>
+                <img src="img/beyondthebrowser/angularuniversal.png" alt="universal" class="borderless">
+                <p>Also know as Server-Side-Rendering</p>
+                <ul>
+                    <li>Increase performance at first load</li>
+                    <li>Help for SEO</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Angular2 is built upon this principle</h3>
+                <pre class="fragment"><code class="hljs typescript">import {bootstrap} from 'angular2/platform/browser';
+import {AppComponent} from './app.component';
+
+bootstrap(AppComponent);
+</code></pre>
+            </section>
+
+        </section>
+        <section id="migration">
+            <section>
+                <h3>Migration<span class="fragment"> ?</span></h3>
+            </section>
+            <section data-background="img/migration/voldemort.gif"><p>&nbsp;</p></section>
+            <section>
+                <h3>A migration Path exists</h3>
+                <p>The Angular Team works very hard around a way to transform our AngularJS application in Angular2 App</p>
+            </section>
+            <section>
+                <h3>UpgradeAdapter</h3>
+                <p>A module allowing to <b>Upgrade</b> and <b>Downgrade</b><br>elements of Ng1 and Ng2</p>
+                <ul class="fragment">
+                    <li>Allow new syntax in template</li>
+                    <li>Synchronize $rootScope.$digest with Zones</li>
+                    <li>Create a bridge between DI of two systems</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Downgrading from ng2 to ng1</h3>
+
+                <pre class="fragment"><code class="hljs javascript">import {UpgradeAdapter} from 'angular2/upgrade';
+
+var adapter = new UpgradeAdapter();
+var app = angular.module('myApp', []);
+
+adapter.bootstrap(document.body, ['myApp']);</code></pre>
+                <pre class="fragment"><code class="hljs javascript">app.directive('productDetail',
+  adapter.downgradeNg2Component(ProductDetail));</code></pre>
+            </section>
+            <section>
+                <h3>Upgrading from ng1 to ng2</h3>
+
+                <pre><code class="hljs javascript">@Component({
+  selector: 'product-list',
+  directives: [
+    adapter.upgradeNg1Component('productListItem')
+  ],
+  template: `&lt;h2&gt;Product List&lt;/h2&gt;
+    &lt;product-list-item [product]=&quot;product&quot;&gt;&lt;/product-list-item&gt;`
+})
+class ProductList {
+  @Input() products: Product[];
+  ...
+}</code></pre>
+            </section>
+            <section data-transition="none-out">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/full-angularjs.png" alt="full-angularjs" class="borderless">
+            </section>
+            <section data-transition="none">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/mix-ng1-ng2.png" alt="mix-ng1-ng2" class="borderless">
+            </section>
+            <section data-transition="none-in">
+                <h3>How do we proceed ?</h3>
+                <img src="img/migration/full-ng2.png" alt="full-ng2" class="borderless">
+            </section>
+            <section>
+                <h3>My Opinion ?</h3>
+                <p>The most important requirement to do the migration is...</p>
+                <p class="fragment">Good coding style in Angular 1.5+ !</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>When can we use it ?</h3>
+                <img src="img/release.png" alt="release">
+                <a href="https://github.com/angular/angular/milestones">Check on Github !</a>
+            </section>
+            <section>
+                <h3>But... just today</h3>
+                <img src="img/rc0.png" alt="releasecandidate" class="fragment">
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>And what about a demo ?</h3>
+                <p>If we have the time...</p>
+            </section>
+            <section>
+                <h3>Thank you</h3>
+                <p class="fragment">Any questions ?</p>
+            </section>
+            <section>
+                <h3>Say if you like this presentation ?</h3>
+                <!-- <img src="img/qrcode.png" alt="qrcode">
+                <p>http://goo.gl/j1UmGA</p> -->
+            </section>
+            <section data-background="img/dropthemic.gif">&nbsp;</section>
+        </section>
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true },
+            { src: 'plugin/notes/notes.js', async: true },
+            { src: 'socket.io/socket.io.js', async: true },
+            { src: 'plugin/notes-server/client.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
